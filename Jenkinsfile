@@ -13,42 +13,42 @@ pipeline {
     stages {
         stage('Print version') {
             steps {
-                sh '''
+                sh """
                     echo "Version: ${params.version}"
-                    echo "environment: ${params.environment}"
-                '''
+                    echo "Environment: ${params.environment}"
+                """
             }
         }
         stage('Init') {
             steps {
-                sh '''
+                sh """
                     cd terraform
                     terraform init --backend-config=${params.environment}/backend.tf -reconfigure
-                '''
+                """
             }
         }
         stage('Plan') {
             steps {
-                sh '''
+                sh """
                     cd terraform
                     terraform plan -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}"
-                '''
+                """
             }
         }
         stage('Apply') {
             steps {
-                sh '''
+                sh """
                     cd terraform
                     terraform apply -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -auto-approve
-                '''
+                """
             }
         }
         /*stage('Destroy') {
             steps {
-                sh '''
+                sh """
                     cd terraform
                     terraform destroy -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -auto-approve
-                '''
+                """
             }
         }*/
     }

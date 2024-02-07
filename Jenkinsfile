@@ -43,13 +43,13 @@ pipeline {
                 """
             }
         }
-        /*stage('Destroy') {
-            steps {
-                sh """
-                    cd terraform
-                    terraform destroy -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -auto-approve
-                """
-            }
-        }*/
+    }
+    post {
+        success {
+            echo "Pipeline is success"
+        }
+        failure {
+            echo "Pipeline is failed, generally used to send alerts"
+        }
     }
 }

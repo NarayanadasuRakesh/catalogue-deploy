@@ -2,6 +2,9 @@ pipeline {
     agent {
         node { label 'node1' }
     }
+    options {
+        ansiColor('xterm')
+    }
     parameters {
         string(name: 'version', defaultValue: '', description: 'What is the artifact version')
         string(name: 'environment', defaultValue: '', description: 'What is environment')

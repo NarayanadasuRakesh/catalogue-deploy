@@ -1,5 +1,5 @@
 module "catalogue" {
-  source = "git::https://github.com/NarayanadasuRakesh/automation-with-terraform-ansible-infra-dev/tree/master/terraform-app?ref=master"
+  source = "git::https://github.com/NarayanadasuRakesh/terraform-app-module.git?ref=master"
   project_name = var.project_name
   environment = var.environment
   common_tags = var.common_tags
